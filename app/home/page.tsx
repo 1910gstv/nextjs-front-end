@@ -1,4 +1,9 @@
+import SolutionCard from '@/app/ui/home/solution-card';
+import { fetchSolutions } from '@/app/lib/data';
+
 export default function Page() {
+  const solutions = fetchSolutions() || [];
+    
   return (
     <main className="min-h-screen">
       {/* Hero */}
@@ -25,12 +30,8 @@ export default function Page() {
           <h2 className="text-3xl font-bold mb-6">
             Sobre Nossa Solução
           </h2>
-
-          <p className="text-gray-600 text-lg">
-            Desenvolvemos ferramentas que simplificam processos,
-            aumentam a produtividade e ajudam empresas de todos os
-            tamanhos a alcançarem melhores resultados.
-          </p>
+        <SolutionCard solutionCard={solutions}/>
+          
         </div>
       </section>
 

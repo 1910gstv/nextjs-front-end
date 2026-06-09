@@ -8,6 +8,7 @@ import {
   Revenue,
 } from './definitions';
 import { formatCurrency } from './utils';
+import { solutions } from './solutions-data';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -215,4 +216,8 @@ export async function fetchFilteredCustomers(query: string) {
     console.error('Database Error:', err);
     throw new Error('Failed to fetch customer table.');
   }
+}
+
+export function fetchSolutions(){
+  return solutions;
 }
