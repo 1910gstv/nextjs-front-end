@@ -88,6 +88,17 @@ async function seedRevenue() {
     );
   `;
 
+  await sql`
+
+  create table contacts (
+    id serial not null primary key,
+  name string not null,
+  email string not null,
+  message text not null
+)
+
+  `
+
   const insertedRevenue = await Promise.all(
     revenue.map(
       (rev) => sql`
