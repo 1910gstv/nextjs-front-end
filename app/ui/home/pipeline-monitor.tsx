@@ -36,7 +36,7 @@ export default function PipelineMonitor() {
         <span className="text-[11px] tracking-[0.18em] uppercase text-[#4a7fa5] font-medium">
           Pipeline de dados — monitor ao vivo
         </span>
-        <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
+        <span className="w-2 h-2 rounded-full bg-yellow-200 animate-pulse" />
       </div>
 
       {/* grid */}
@@ -56,7 +56,7 @@ export default function PipelineMonitor() {
                 return (
                   <div key={ci} className="flex items-center justify-center">
                     <svg width="20" height="12" viewBox="0 0 20 12">
-                      <path d="M0 6h16M11 1l5 5-5 5" stroke={arrowPast ? "#2dd4a0" : "#1e3a52"} strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"
+                      <path d="M0 6h16M11 1l5 5-5 5" stroke={arrowPast ? "#fde68a" : "#1e3a52"} strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"
                         style={{ transition: "stroke 0.4s" }}
                       />
                     </svg>
@@ -72,10 +72,10 @@ export default function PipelineMonitor() {
                   key={ci}
                   className="rounded-xl border py-4 px-3 text-center text-sm font-medium transition-all duration-400"
                   style={{
-                    borderColor: active ? "#2dd4a0" : past ? "#1a5c44" : "#1e3a52",
-                    color:       active ? "#2dd4a0" : past ? "#4aa88a" : "#7ba8c4",
-                    background:  active ? "#0a2920" : past ? "#0a1f17" : "#0f2236",
-                    boxShadow:   active ? "0 0 16px rgba(45,212,160,0.15)" : "none",
+                    borderColor: active ? "#fde68a" : past ? "#1a5c44" : "#1e3a52",
+                    color:       active ? "#fde68a" : past ? "#4aa88a" : "#7ba8c4",
+                    background:  active ? "#777048" : past ? "#0a1f17" : "#0f2236",
+                    boxShadow:   active ? "0 0 16px rgba(253,230,138,0.15)" : "none",
                     transform:   active ? "scale(1.03)" : "scale(1)",
                     transition:  "all 0.4s ease",
                   }}
@@ -91,7 +91,7 @@ export default function PipelineMonitor() {
       {/* legenda */}
       <div className="mt-8 pt-6 border-t border-white/5 flex items-center gap-6 flex-wrap">
         {[
-          { color: "#2dd4a0", label: "Em processamento" },
+          { color: "#fde68a", label: "Em processamento" },
           { color: "#4aa88a", label: "Concluído"        },
           { color: "#1e3a52", label: "Aguardando"       },
         ].map((item) => (
