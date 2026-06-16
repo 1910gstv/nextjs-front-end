@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import Form from "next/form";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { sendForm } from "../lib/home/actions";
 import Image from "next/image";
 import SolutionCard from "@/app/ui/home/solution-card";
@@ -129,6 +128,17 @@ function Reveal({ children, delay = 0, className = "" }: { children: React.React
 /* ─── Main Page ─────────────────────────────────────────────── */
 export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+
+  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSending(true);
+    const formData = new FormData(e.currentTarget);
+    await sendForm(formData);
+    setSending(false);
+    setSubmitted(true);
+  }, []);
 
   const stats = [
     { value: 2.5, suffix: "tri", prefix: "R$", label: "perdidos por empresas brasileiras ao ano por má gestão de dados", source: "IBM / Gartner" },
@@ -403,8 +413,8 @@ export default function Page() {
           </Reveal>
 
           <Reveal delay={100}>
-            <Form
-              action={sendForm}
+            <form
+              onSubmit={handleSubmit}
               className="bg-white/5 backdrop-blur border border-white/10 p-8 md:p-10 rounded-3xl"
             >
               <div className="space-y-5">
@@ -448,18 +458,72 @@ export default function Page() {
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-indigo-500/25 active:scale-[0.98]"
+                  disabled={sending}
+                  className="w-full bg-indigo-600 hover:bg-indigo-500 disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold py-4 rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-indigo-500/25 active:scale-[0.98] flex items-center justify-center gap-2"
                 >
-                  Solicitar Diagnóstico Gratuito
+                  {sending ? (
+                    <>
+                      <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
+                      </svg>
+                      Enviando...
+                    </>
+                  ) : "Solicitar Diagnóstico Gratuito"}
                 </button>
                 <p className="text-center text-xs text-slate-500">
                   Garantimos total privacidade dos seus dados. Sem spam.
                 </p>
               </div>
-            </Form>
+            </form>
           </Reveal>
         </div>
       </section>
+
+      {/* ── Modal de Obrigado ── */}
+      {submitted && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center px-4"
+          style={{ background: "rgba(0,0,0,0.75)", backdropFilter: "blur(6px)", animation: "fadeDown 0.3s ease both" }}
+          onClick={() => setSubmitted(false)}
+        >
+          <div
+            className="relative bg-[#0d1b2e] border border-white/10 rounded-3xl p-10 max-w-md w-full text-center shadow-2xl"
+            style={{ animation: "fadeUp 0.35s ease both" }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* ícone */}
+            <div className="mx-auto mb-6 w-20 h-20 rounded-full bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
+              <svg className="w-9 h-9 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+
+            <h3 className="text-2xl font-bold text-white mb-3">Recebemos seu contato!</h3>
+            <p className="text-slate-400 leading-relaxed mb-8">
+              Em breve um especialista da Alcina entrará em contato para entender melhor o seu contexto e apresentar o diagnóstico.
+            </p>
+
+            <button
+              onClick={() => setSubmitted(false)}
+              className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-indigo-500/25"
+            >
+              Fechar
+            </button>
+
+            {/* fechar no canto */}
+            <button
+              onClick={() => setSubmitted(false)}
+              className="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors"
+              aria-label="Fechar"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* ── Footer ── */}
       <footer className="bg-slate-950 border-t border-white/5 text-slate-400 py-14 px-6">
