@@ -8,7 +8,6 @@ import {
   Revenue,
 } from './definitions';
 import { formatCurrency } from './utils';
-import { solutions } from './solutions-data';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -218,6 +217,3 @@ export async function fetchFilteredCustomers(query: string) {
   }
 }
 
-export function fetchSolutions(){
-  return solutions;
-}
