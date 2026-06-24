@@ -783,7 +783,7 @@ export default function Page() {
             <h4 className="text-white text-sm font-semibold mb-4 uppercase tracking-widest">
               Contato
             </h4>
-            <p className="flex items-center gap-2 text-sm mt-1">
+            {/* <p className="flex items-center gap-2 text-sm mt-1">
               <svg
                 className="w-4 h-4 text-green-400 shrink-0"
                 fill="currentColor"
@@ -793,7 +793,7 @@ export default function Page() {
                 <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.17 1.535 5.943L.057 23.428a.75.75 0 00.906.919l5.668-1.453A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.725 9.725 0 01-4.917-1.33l-.353-.21-3.666.94.98-3.571-.23-.368A9.75 9.75 0 1112 21.75z" />
               </svg>
               (11) 99999-9999
-            </p>
+            </p> */}
             <p className="flex items-center gap-2 text-sm mt-3">
               <svg
                 className="w-4 h-4 text-indigo-400 shrink-0"
@@ -808,7 +808,7 @@ export default function Page() {
                   d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                 />
               </svg>
-              contato@alcinaia.com.br
+              contato@alcinadados.com.br
             </p>
           </div>
 
