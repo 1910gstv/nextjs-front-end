@@ -1,6 +1,7 @@
 import '@/app/ui/global.css';
 import { inter } from '@/app/ui/fonts';
 import type { Metadata } from "next";
+import GoogleAnalyticsClient from '@/app/ui/GoogleAnalyticsClient';
 
 export const metadata: Metadata = {
   title: "Alcina Dados & IA",
@@ -17,7 +18,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <body className={`${inter.className} antialiased`}>
+        {children}
+        <GoogleAnalyticsClient />
+      </body>
     </html>
   );
 }
