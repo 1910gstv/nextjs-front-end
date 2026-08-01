@@ -184,7 +184,14 @@ export default function Page() {
   );
 
   const stats = [
-    { value: 12.9, suffix: "mi", prefix: "US$", label: "é o custo médio anual por organização com problemas de qualidade de dados", source: "Gartner" },
+    {
+      value: 12.9,
+      suffix: "mi",
+      prefix: "US$",
+      label:
+        "é o custo médio anual por organização com problemas de qualidade de dados",
+      source: "Gartner",
+    },
     {
       value: 73,
       suffix: "%",
@@ -214,7 +221,7 @@ export default function Page() {
       {/* ── Header ── */}
       <header className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-slate-900/70 border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 h-18 flex items-center justify-between py-4">
-          <div className="flex items-center gap-3">
+          <a href="#" className="flex items-center gap-3">
             <Image
               src="/logo/alcina-logo.png"
               alt="Alcina"
@@ -224,12 +231,12 @@ export default function Page() {
             <span className="text-xl font-light tracking-[0.25em] text-white">
               ALCINA
             </span>
-          </div>
+          </a>
 
           <nav className="hidden lg:flex items-center gap-12">
             {[
-              { label: "Serviços", href: "#serviços" },
               { label: "Quem Somos", href: "#quem-somos" },
+              { label: "Serviços", href: "#serviços" },
               { label: "Contato", href: "#contato" },
             ].map((item) => (
               <a
